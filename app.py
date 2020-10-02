@@ -18,11 +18,11 @@ def login():
 def about():
     return 'QnA App | About.'
 
-@app.route('/Ask a question')
+@app.route('/Askaquestion')
 def ask():
     return 'QnA App  |  Ask a question'
 
-@app.route('/View a question')
+@app.route('/Viewaquestion')
 def view():
     return 'QnA App  |  View a question'
 

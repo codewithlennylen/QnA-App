@@ -18,15 +18,15 @@
           <li>|</li>
           <li><a href="{{ url_for('myquestions') }}">My Questions</a></li>
           <li>|</li>
-          <li><a href="#">Login</a></li>
+          <li><a href="{{ url_for('login') }}">Login</a></li>
           <li>|</li>
-          <li><a href="#">About</a></li>
+          <li><a href="{{ url_for('about') }}">About</a></li>
         </ul>
       </nav>
     </header>
 
     <section id="ask-question">
-        <center><h3><a href="#"> Ask A Question</a></h3></center>
+        <center><h3><a href="{{ url_for('ask') }}"> Ask A Question</a></h3></center>
     </section>
 
     {% block content %}

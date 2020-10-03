@@ -8,7 +8,7 @@ def index():
 
 @app.route('/myquestions')
 def myquestions():
-    return 'QnA App | My Questions'
+    return render_template('myquestions.html')
 
 @app.route('/login')
 def login():

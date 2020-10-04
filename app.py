@@ -12,19 +12,19 @@ def myquestions():
 
 @app.route('/login')
 def login():
-    return 'QnA App | Login Here'
+    return render_template('login.html')
 
 @app.route('/about')
 def about():
-    return 'QnA App | About.'
+    return render_template('about.html')
 
 @app.route('/Askaquestion')
 def ask():
-    return 'QnA App  |  Ask a question'
+    return render_template('ask.html')
 
 @app.route('/Viewaquestion')
 def view():
-    return 'QnA App  |  View a question'
+    return render_template('view.html')
 
 
 if __name__ == "__main__":

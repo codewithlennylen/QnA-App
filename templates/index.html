@@ -4,12 +4,21 @@
 
 <div class="container">
   {% for question in questions_dict %}
-  <div class="question">
-    <a href="{{url_for('view')}}">
-      <h3>{{ question }}</h3>
-      <p>Category: {{ questions_dict[question] }}</p>
-    </a>
-  </div>
+    {% if questions_dict[question][1] %}
+      <div class="question-answered">
+        <a href="{{url_for('view')}}">
+          <h3>{{ question }}</h3>
+          <p>Category: {{ questions_dict[question][0] }}</p>
+        </a>
+      </div>
+    {% else %}
+      <div class="question">
+        <a href="{{url_for('view')}}">
+          <h3>{{ question }}</h3>
+          <p>Category: {{ questions_dict[question][0] }}</p>
+        </a>
+      </div>
+    {% endif %}
   {% endfor %}
 </div>
 

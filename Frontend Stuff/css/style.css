@@ -40,6 +40,12 @@ body {
   padding: 5px 10px 5px 10px;
 }
 
+.container-question button:hover {
+  background-color: #f5d62a;
+  border: 2px black solid;
+  color: black;
+}
+
 #main-navbar {
   background-color: #372af5;
   color: #f5d62a;

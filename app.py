@@ -1,26 +1,23 @@
 from flask import Flask, render_template, url_for
+from flask_sqlalchemy import SQLAlchemy
+
+
 
 app = Flask(__name__)
 
-questions = {
-    "How do you restart a computer?": ["Networking","Random Answer"],
-    "What programming language should i learn": ["Computer programming"],
-    "What is linux": ["Computing","Random Answer"],
-    "Is pirate-bay illegal": ["Computer software"],
-    "The blue screen of death!": ["Computer software","Random Answer"],
-    "What is linux?": ["Computing","Random Answer"],
-    "How do you restart a computer??": ["Computer software"],
-    "How do you access the dark web?": ["Networking","Random Answer"],
-    "Which is the best VPN to use?": ["Security"],
-    "How do I know if my computer has been hacked?": ["Security"],
-    "Which is the best arcade game to download now?": ["Gaming"],
-    "Which application can i download to use in listening mp3 music?": ["Application","Random Answer"]
-}
+app.config['SECRET_KEY'] = 'any_random_characters'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['DEBUG'] = True
+
+db = SQLAlchemy(app)
+
+from models import Question
 
 
 @app.route('/')
 def index():
-    return render_template('index.html', questions_dict=questions)
+    questions_dict = Question.query.all()
+    return render_template('index.html', questions_dict=questions_dict)
 
 
 @app.route('/myquestions')

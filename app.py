@@ -6,12 +6,12 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'any_random_characters'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database2.db'
 app.config['DEBUG'] = True
 
 db = SQLAlchemy(app)
 
-from models import Question
+from models import User, Question, Answer
 
 
 @app.route('/')

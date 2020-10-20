@@ -115,3 +115,29 @@ body {
   text-decoration: underline;
   color: black;
 }
+
+.form-page {
+  margin: 2em;
+  padding: 1em;
+  background-color: chartreuse;
+  text-align: center;
+}
+
+.form-page button {
+  background-color: #05f571;
+  border-radius: 12px;
+  border: 2px black solid;
+  color: black;
+  font-size: 16px;
+  padding: 5px 10px 5px 10px;
+}
+
+.form-page button:hover {
+  background-color: #f5d62a;
+  border: 2px black solid;
+  color: black;
+}
+
+/* .form-page form {
+  text-align: left;
+} */

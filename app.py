@@ -52,7 +52,7 @@ def ask():
 def view():
     return render_template('view.html')
 
-@app.route('/Register')
+@app.route('/register')
 def register():
     return render_template('register.html')
 

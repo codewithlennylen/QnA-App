@@ -40,6 +40,12 @@ body {
   padding: 5px 10px 5px 10px;
 }
 
+.container-question button:hover {
+  background-color: #f5d62a;
+  border: 2px black solid;
+  color: black;
+}
+
 #main-navbar {
   background-color: #372af5;
   color: #f5d62a;
@@ -109,3 +115,34 @@ body {
   text-decoration: underline;
   color: black;
 }
+
+.form-page {
+  margin: 2em;
+  padding: 1em;
+  background-color: chartreuse;
+  text-align: center;
+}
+
+.form-page a {
+  text-decoration: none;
+  /* color: #f5d62a; */
+}
+
+.form-page button {
+  background-color: #05f571;
+  border-radius: 12px;
+  border: 2px black solid;
+  color: black;
+  font-size: 16px;
+  padding: 5px 10px 5px 10px;
+}
+
+.form-page button:hover {
+  background-color: #f5d62a;
+  border: 2px black solid;
+  color: black;
+}
+
+/* .form-page form {
+  text-align: left;
+} */

@@ -123,6 +123,11 @@ body {
   text-align: center;
 }
 
+.form-page a {
+  text-decoration: none;
+  /* color: #f5d62a; */
+}
+
 .form-page button {
   background-color: #05f571;
   border-radius: 12px;

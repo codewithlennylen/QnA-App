@@ -1,5 +1,6 @@
 from flask import Flask, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
 
 
 
@@ -10,9 +11,16 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database2.db'
 app.config['DEBUG'] = True
 
 db = SQLAlchemy(app)
+login_manager = LoginManager(app)
+login_manager.login_view = 'login'
+
 
 from models import User, Question, Answer
 
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
 
 @app.route('/')
 def index():

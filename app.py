@@ -43,12 +43,12 @@ def about():
     return render_template('aboutt.html')
 
 
-@app.route('/Askaquestion')
+@app.route('/askaquestion')
 def ask():
     return render_template('ask.html')
 
 
-@app.route('/Viewaquestion')
+@app.route('/viewaquestion')
 def view():
     return render_template('view.html')
 

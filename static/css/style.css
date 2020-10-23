@@ -146,3 +146,7 @@ body {
 /* .form-page form {
   text-align: left;
 } */
+
+.form-page small {
+  color: red;
+}

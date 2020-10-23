@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 
@@ -33,11 +33,6 @@ def myquestions():
     return render_template('myquestions.html')
 
 
-@app.route('/login')
-def login():
-    return render_template('login.html')
-
-
 @app.route('/about')
 def about():
     return render_template('aboutt.html')
@@ -47,15 +42,50 @@ def about():
 def ask():
     return render_template('ask.html')
 
-
 @app.route('/viewaquestion')
 def view():
     return render_template('view.html')
 
-@app.route('/register')
+@app.route('/register', methods=['GET','POST'])
 def register():
+    # If we get a POST Request, Proceed to Registration
+    if request.method == 'POST':
+        # Get the Data from the Register Form
+        username = request.form['username']
+        password = request.form['password']
+        confirmPassword = request.form['confirmPassword']
+
+        # Check if the username exists in the database
+        user_exists = User.query.filter_by(username=username).all()
+        if user_exists:
+            error_msg = 'That username already exists. Please use a different one.'
+            return render_template('register.html',error_msg=error_msg)
+
+        # Check if the password matcheds with the confirm password
+        if password != confirmPassword:
+            error_msg = 'The Passwords do not match. Please Try Again.'
+            return render_template('register.html',error_msg=error_msg)
+
+
+        # if all checks have passed, proceed to add the user to the datbase.
+        new_user = User(
+            username=username,
+            password=password,
+            is_admin=False,
+            is_expert=False
+        )
+        db.session.add(new_user)
+        db.session.commit()
+
+        # Redirect the new user to the Login Page
+        return redirect(url_for('login'))
+
+    # Else if this is a GET request, show the register page
     return render_template('register.html')
 
+@app.route('/login')
+def login():
+    return render_template('login.html')
 
 if __name__ == "__main__":
     app.run(debug=True)

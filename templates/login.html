@@ -1,23 +1,22 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 
 <h1>QnA App | Login Page</h1>
 
 <div class="form-page">
-      <h2><center>Login</center></h2>
+  <h2><center>Login</center></h2>
 
-      <form action="#" method="post">
-        <label for="username">Username: </label><br />
-        <input type="text" name="username" /><br />
-        <label for="password">Password:</label><br />
-        <input type="password" /><br />
+  <form action="{{ url_for('login') }}" method="post">
+    <small id="errorMessage"><label>{{ error_msg }}</label></small> <br />
+    <label for="username">Username: </label><br />
+    <input type="text" name="username" /><br />
+    <label for="password">Password:</label><br />
+    <input type="password" name="password" /><br />
 
-        <button type="submit">Login</button>
-      </form>
+    <button type="submit">Login</button>
+  </form>
 
-      <p>Don't Have an Account ? <a href="/register">Register Now</a></p>
-      <section id="members-answers"></section>
-    </div>
+  <p>Don't Have an Account ? <a href="/register">Register Now</a></p>
+  <section id="members-answers"></section>
+</div>
 
 {% endblock %}

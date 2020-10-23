@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
+from flask_login import LoginManager, login_user
 
 
 
@@ -83,8 +83,30 @@ def register():
     # Else if this is a GET request, show the register page
     return render_template('register.html')
 
-@app.route('/login')
+@app.route('/login', methods=['GET','POST'])
 def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        # Check if the user exists in the database
+        user_exists = User.query.filter_by(username=username).first()
+        if user_exists:
+            # Since the user exists let's proceed to check whether the password is correct
+            if password == user_exists.password:
+                # Passwords match! > Proceed to the homepage
+                login_user(user_exists)
+                return redirect(url_for('index'))
+                
+            # Else if the passwords don't match > Inform the user to try again
+            else:
+                error_msg = 'The Username or Password is wrong. Please try again!'
+                return render_template('login.html', error_msg=error_msg)
+        # Else if the user does not exist in the database, Inform them to register
+        else:
+            error_msg = 'The Username Does not Exist. Register Instead?'
+            return render_template('login.html', error_msg=error_msg)
+    
     return render_template('login.html')
 
 if __name__ == "__main__":

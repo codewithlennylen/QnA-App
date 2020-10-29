@@ -96,7 +96,6 @@ def login():
         if user_exists:
             # Since the user exists let's proceed to check whether the password is correct
             # Because we are hashing passwords, we have to compare the hashes
-            # if password == user_exists.password:
             if bcrypt.check_password_hash(user_exists.password, password):
                 # Passwords match! > Proceed to the homepage
                 login_user(user_exists)

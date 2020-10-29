@@ -1,7 +1,7 @@
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, login_user
-
+from flask_login import LoginManager, login_user, logout_user
+from flask_bcrypt import Bcrypt
 
 
 app = Flask(__name__)
@@ -11,6 +11,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database2.db'
 app.config['DEBUG'] = True
 
 db = SQLAlchemy(app)
+bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
@@ -70,7 +71,8 @@ def register():
         # if all checks have passed, proceed to add the user to the datbase.
         new_user = User(
             username=username,
-            password=password,
+            # Hash the password before storing it to the database.
+            password= bcrypt.generate_password_hash(password).decode('utf-8'),
             is_admin=False,
             is_expert=False
         )
@@ -93,7 +95,9 @@ def login():
         user_exists = User.query.filter_by(username=username).first()
         if user_exists:
             # Since the user exists let's proceed to check whether the password is correct
-            if password == user_exists.password:
+            # Because we are hashing passwords, we have to compare the hashes
+            # if password == user_exists.password:
+            if bcrypt.check_password_hash(user_exists.password, password):
                 # Passwords match! > Proceed to the homepage
                 login_user(user_exists)
                 return redirect(url_for('index'))
@@ -108,6 +112,11 @@ def login():
             return render_template('login.html', error_msg=error_msg)
     
     return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
 
 if __name__ == "__main__":
     app.run(debug=True)

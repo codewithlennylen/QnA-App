@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, login_user, logout_user
+from flask_login import LoginManager, login_user, logout_user, current_user
 from flask_bcrypt import Bcrypt
 
 
@@ -49,6 +49,10 @@ def view():
 
 @app.route('/register', methods=['GET','POST'])
 def register():
+    # if the user is already logged in, redirect them to the homepage
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+        
     # If we get a POST Request, Proceed to Registration
     if request.method == 'POST':
         # Get the Data from the Register Form
@@ -87,6 +91,10 @@ def register():
 
 @app.route('/login', methods=['GET','POST'])
 def login():
+    # if the user is already logged in, redirect them to the homepage
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']

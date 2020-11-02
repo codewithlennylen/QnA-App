@@ -146,3 +146,29 @@ body {
 /* .form-page form {
   text-align: left;
 } */
+
+.container-ask-question {
+  background-color: #f1f1f1;
+  margin: 1em;
+  padding: 1em;
+}
+
+.container-ask-question h1 {
+  background-color: #fff;
+  margin: auto;
+}
+
+.container-ask-question button {
+  background-color: #05f571;
+  border-radius: 12px;
+  border: 2px black solid;
+  color: black;
+  font-size: 16px;
+  padding: 5px 10px 5px 10px;
+}
+
+.container-ask-question button:hover {
+  background-color: #f5d62a;
+  border: 2px black solid;
+  color: black;
+}

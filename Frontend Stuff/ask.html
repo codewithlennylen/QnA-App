@@ -30,14 +30,21 @@
       </center>
     </section>
 
-    <div class="container-ask-question">
-      <h1><center>How Do you Restart a Computer?</center></h1>
-      <p>Category: <small>Networking</small></p>
+    <div class="container-question">
+      <h1><center>What is your Question?</center></h1>
+      <!-- <p>Category: <small>Networking</small></p> -->
 
       <form action="#" method="post">
-        <textarea name="answerText" cols="100%" rows="10"></textarea>
-        <br />
-        <button type="submit">Post Answer</button>
+        <label for="Question">Question: </label><br />
+        <input type="text" name="question" /><br />
+        <label for="category">Choose a Category:</label><br />
+        <select name="category">
+          <option value="networking">Networking</option>
+          <option value="troubleshooting">Troubleshooting</option>
+          <option value="lifestyle">Lifestyle</option>
+        </select>
+
+        <br /><button type="submit">Ask Question</button>
       </form>
 
       <section id="members-answers"></section>

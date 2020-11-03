@@ -6,7 +6,7 @@
   <h1><center>What is your Question?</center></h1>
   <!-- <p>Category: <small>Networking</small></p> -->
 
-  <form action="#" method="post">
+  <form action="{{ url_for('ask') }}" method="post">
     <label for="Question">Question: </label><br />
     <input type="text" name="question" /><br />
     <label for="category">Choose a Category:</label><br />

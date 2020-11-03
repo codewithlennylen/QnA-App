@@ -39,8 +39,26 @@ def about():
     return render_template('aboutt.html')
 
 
-@app.route('/askaquestion')
+@app.route('/askaquestion', methods=['GET','POST'])
 def ask():
+    # If we get a POST Request, Proceed to Putting the Question in the Database
+    if request.method == 'POST':
+        # Get the Data from the Form
+        question = request.form['question']
+        category = request.form['category']
+
+        # Proceed to inputting the data into the database
+        new_question = Question(
+            question_text = question,
+            category = category,
+            asker = current_user
+        )
+        db.session.add(new_question)
+        db.session.commit()
+
+        # Redirect users to the Homepage
+        return redirect(url_for('index'))
+
     return render_template('ask.html')
 
 @app.route('/viewaquestion')

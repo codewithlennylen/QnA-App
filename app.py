@@ -64,7 +64,7 @@ def ask():
 
 @app.route('/viewaquestion/<int:question_id>')
 def view(question_id):
-    question = Question.query.get_or_404(question_id)
+    question = Question.query.filter_by(id=question_id).first()
     return render_template('view.html', question=question)
 
 

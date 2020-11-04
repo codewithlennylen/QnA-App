@@ -5,14 +5,14 @@
 <div class="container">
   {% for question in questions_dict %} {% if question.answer %}
   <div class="question-answered">
-    <a href="{{url_for('view')}}">
+    <a href="{{url_for('view',question_id = question.id)}}">
       <h3>{{ question.question_text }}</h3>
       <p>Category: {{ question.category }}</p>
     </a>
   </div>
   {% else %}
   <div class="question">
-    <a href="{{url_for('view')}}">
+    <a href="{{url_for('view',question_id = question.id)}}">
       <h3>{{ question.question_text }}</h3>
       <p>Category: {{ question.category }}</p>
     </a>

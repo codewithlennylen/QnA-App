@@ -15,13 +15,12 @@ bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
-
 from models import User, Question, Answer
-
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
+
 
 @app.route('/')
 def index():
@@ -39,7 +38,7 @@ def about():
     return render_template('aboutt.html')
 
 
-@app.route('/askaquestion', methods=['GET','POST'])
+@app.route('/askaquestion', methods=['GET', 'POST'])
 @login_required
 def ask():
     # If we get a POST Request, Proceed to Putting the Question in the Database
@@ -50,9 +49,9 @@ def ask():
 
         # Proceed to inputting the data into the database
         new_question = Question(
-            question_text = question,
-            category = category,
-            asker = current_user
+            question_text=question,
+            category=category,
+            asker=current_user
         )
         db.session.add(new_question)
         db.session.commit()
@@ -62,16 +61,19 @@ def ask():
 
     return render_template('ask.html')
 
-@app.route('/viewaquestion')
-def view():
-    return render_template('view.html')
 
-@app.route('/register', methods=['GET','POST'])
+@app.route('/viewaquestion/<int:question_id>')
+def view(question_id):
+    question = Question.query.get_or_404(question_id)
+    return render_template('view.html', question=question)
+
+
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     # if the user is already logged in, redirect them to the homepage
     if current_user.is_authenticated:
         return redirect(url_for('index'))
-        
+
     # If we get a POST Request, Proceed to Registration
     if request.method == 'POST':
         # Get the Data from the Register Form
@@ -83,19 +85,18 @@ def register():
         user_exists = User.query.filter_by(username=username).all()
         if user_exists:
             error_msg = 'That username already exists. Please use a different one.'
-            return render_template('register.html',error_msg=error_msg)
+            return render_template('register.html', error_msg=error_msg)
 
         # Check if the password matcheds with the confirm password
         if password != confirmPassword:
             error_msg = 'The Passwords do not match. Please Try Again.'
-            return render_template('register.html',error_msg=error_msg)
-
+            return render_template('register.html', error_msg=error_msg)
 
         # if all checks have passed, proceed to add the user to the datbase.
         new_user = User(
             username=username,
             # Hash the password before storing it to the database.
-            password= bcrypt.generate_password_hash(password).decode('utf-8'),
+            password=bcrypt.generate_password_hash(password).decode('utf-8'),
             is_admin=False,
             is_expert=False
         )
@@ -108,7 +109,8 @@ def register():
     # Else if this is a GET request, show the register page
     return render_template('register.html')
 
-@app.route('/login', methods=['GET','POST'])
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     # if the user is already logged in, redirect them to the homepage
     if current_user.is_authenticated:
@@ -127,7 +129,7 @@ def login():
                 # Passwords match! > Proceed to the homepage
                 login_user(user_exists)
                 return redirect(url_for('index'))
-                
+
             # Else if the passwords don't match > Inform the user to try again
             else:
                 error_msg = 'The Username or Password is wrong. Please try again!'
@@ -136,13 +138,15 @@ def login():
         else:
             error_msg = 'The Username Does not Exist. Register Instead?'
             return render_template('login.html', error_msg=error_msg)
-    
+
     return render_template('login.html')
+
 
 @app.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
 
 if __name__ == "__main__":
     app.run(debug=True)

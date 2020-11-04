@@ -62,9 +62,23 @@ def ask():
     return render_template('ask.html')
 
 
-@app.route('/viewaquestion/<int:question_id>')
+@app.route('/viewaquestion/<int:question_id>',methods=['GET' , 'POST])
+@login_required                                                       
 def view(question_id):
+                                                               
     question = Question.query.filter_by(id=question_id).first()
+    if request.method == 'POST':
+        answer = request.form['answer']
+                                                      
+     new_answer = Answer(
+         answerText=answer
+         answerer=current_user
+     )
+     db.session.add(new_answer)
+     db.session.commit()
+                                                       
+     return redirect(url_for('index))
+                             
     return render_template('view.html', question=question)
 
 

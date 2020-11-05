@@ -25,10 +25,8 @@ def load_user(user_id):
 @app.route('/')
 def index():
     questions_dict = Question.query.all()
-    answers_dict = Answer.query.all()
     return render_template('index.html',
-                           questions_dict=questions_dict,
-                           answers_dict=answers_dict
+                           questions_dict=questions_dict
                            )
 
 

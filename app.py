@@ -68,11 +68,11 @@ def view(question_id):
     question = Question.query.filter_by(id=question_id).first()
     
     if request.method == 'POST':
-        answer = request.form['answerText']
+        answer = request.form['answerText'] #['answer']
 
         new_answer = Answer(
-            answer_text=answer,
-            the_question=current_user
+            answer_text=answer, #answerText=answer
+            the_question=question #questioner=current_user
         )
         db.session.add(new_answer)
         db.session.commit()

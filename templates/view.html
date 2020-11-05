@@ -7,7 +7,7 @@
   <h1><center>{{ question.question_text }}</center></h1>
   <p>Category: <small>{{ question.category }}</small></p>
 
-      <form action="{{ url_for('view') }}" method="post">
+      <form action="{{ url_for('view', question_id=question.id) }}" method="post">
         <textarea name="answerText" cols="100%" rows="10"></textarea>
         <br />
         <button type="submit">Post Answer</button>

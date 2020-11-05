@@ -3,7 +3,10 @@
 <h1>QnA App | Homepage</h1>
 
 <div class="container">
-  {% for question in questions_dict %} {% if question.answer %}
+  {% for question in questions_dict %} 
+  {% if question.answers_to_question %}
+  {# if answers_dict[question.id].for_question_id #}
+  {# for answer in answers_dict #}
   <div class="question-answered">
     <a href="{{url_for('view',question_id = question.id)}}">
       <h3>{{ question.question_text }}</h3>

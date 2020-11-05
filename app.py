@@ -25,7 +25,11 @@ def load_user(user_id):
 @app.route('/')
 def index():
     questions_dict = Question.query.all()
-    return render_template('index.html', questions_dict=questions_dict)
+    answers_dict = Answer.query.all()
+    return render_template('index.html',
+                           questions_dict=questions_dict,
+                           answers_dict=answers_dict
+                           )
 
 
 @app.route('/myquestions')
@@ -62,23 +66,23 @@ def ask():
     return render_template('ask.html')
 
 
-@app.route('/viewaquestion/<int:question_id>/', methods=['GET' , 'POST'])
-@login_required                                                       
-def view(question_id):             
+@app.route('/viewaquestion/<int:question_id>/', methods=['GET', 'POST'])
+@login_required
+def view(question_id):
     question = Question.query.filter_by(id=question_id).first()
-    
+
     if request.method == 'POST':
-        answer = request.form['answerText'] #['answer']
+        answer = request.form['answerText']  # ['answer']
 
         new_answer = Answer(
-            answer_text=answer, #answerText=answer
-            the_question=question #questioner=current_user
+            answer_text=answer,  # answerText=answer
+            the_question=question  # questioner=current_user
         )
         db.session.add(new_answer)
         db.session.commit()
 
         return redirect(url_for('index'))
-    
+
     return render_template('view.html', question=question)
 
 

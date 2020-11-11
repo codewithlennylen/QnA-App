@@ -70,6 +70,7 @@ def ask():
 @login_required
 def view(question_id):
     question = Question.query.filter_by(id=question_id).first()
+    answers = Answer.query.filter_by(for_question_id=question_id).all()
 
     if request.method == 'POST':
         answer = request.form['answerText']  # ['answer']
@@ -83,7 +84,7 @@ def view(question_id):
 
         return redirect(url_for('index'))
 
-    return render_template('view.html', question=question)
+    return render_template('view.html', question=question, answers=answers)
 
 
 @app.route('/register', methods=['GET', 'POST'])

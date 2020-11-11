@@ -30,10 +30,10 @@ def index():
                            )
 
 
-@app.route('/myquestions/<int:user_id')
+@app.route('/myquestions')
 @login_required
-def myquestions(user_id):
-    question = Question.query.filter_by(id=user_id).all()
+def myquestions():
+    question = Question.query.filter_by(id=current_user).all()
     return render_template('myquestions.html',question=question)
 
 

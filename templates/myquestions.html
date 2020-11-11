@@ -7,7 +7,7 @@
 
 <div class="container">
     {% for q in question %} 
-    {% if question.answers_to_question %}
+    {% if q.answers_to_question %}
   
     <div class="question-answered">
       <a href="{{url_for('view',question_id = q.id)}}">

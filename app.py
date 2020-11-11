@@ -33,7 +33,7 @@ def index():
 @app.route('/myquestions/<int:user_id')
 @login_required
 def myquestions(user_id):
-    question = Question.query.filter_by(id=user_id).first()
+    question = Question.query.filter_by(id=user_id).all()
     return render_template('myquestions.html',question=question)
 
 

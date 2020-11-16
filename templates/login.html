@@ -1,22 +1,37 @@
 {% extends "base.html" %} {% block content %}
 
-<h1>QnA App | Login Page</h1>
 
-<div class="form-page">
-  <h2><center>Login</center></h2>
+<div class="container">
 
-  <form action="{{ url_for('login') }}" method="post">
-    <small id="errorMessage"><label>{{ error_msg }}</label></small> <br />
-    <label for="username">Username: </label><br />
-    <input type="text" name="username" /><br />
-    <label for="password">Password:</label><br />
-    <input type="password" name="password" /><br />
-
-    <button type="submit">Login</button>
-  </form>
-
-  <p>Don't Have an Account ? <a href="/register">Register Now</a></p>
-  <section id="members-answers"></section>
+<div class="card border-dark">
+  <div class="card-header text-warning">
+    <h4><b>QnA App | Login Page</b></h4>
+  </div>
+  <div class="card-body">
+    <!-- <h5 class="card-title">Special title treatment</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a> -->
+    <form action="{{ url_for('login') }}" method="post">
+      <small id="errorMessage"><label>{{ error_msg }}</label></small> <br />
+      <div class="form-group">
+        <label for="username">Username: </label>
+        <input type="text" class="form-control" aria-describedby="emailHelp">
+      </div>
+      <div class="form-group">
+        <label for="password">Password: </label>
+        <input type="password" class="form-control">
+      </div>
+      <button type="submit" class="btn btn-primary">Login</button>
+      <br>
+    </form>
+  </div>
+  <div class="card-footer text-muted">
+    Don't Have an Account ? <a href="{{ url_for('register') }}" class="text-warning"><b>Register Now</b></a>
+  </div>
 </div>
+
+</div>
+
+
 
 {% endblock %}

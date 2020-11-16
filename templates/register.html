@@ -2,6 +2,39 @@
 
 <h1>QnA App | Register</h1>
 
+
+<div class="container">
+
+  <div class="card border-dark">
+    <div class="card-header text-warning">
+      <h4><b>QnA App | Login Page</b></h4>
+    </div>
+    <div class="card-body">
+      <!-- <h5 class="card-title">Special title treatment</h5>
+      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a> -->
+      <form action="{{ url_for('login') }}" method="post">
+        <small id="errorMessage"><label>{{ error_msg }}</label></small> <br />
+        <div class="form-group">
+          <label for="username">Username: </label>
+          <input type="text" class="form-control" aria-describedby="emailHelp">
+        </div>
+        <div class="form-group">
+          <label for="password">Password: </label>
+          <input type="password" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+        <br>
+      </form>
+    </div>
+    <div class="card-footer text-muted">
+      Don't Have an Account ? <a href="{{ url_for('register') }}" class="text-warning"><b>Register Now</b></a>
+    </div>
+  </div>
+  
+  </div>
+    
+
 <div class="form-page">
   <h2><center>Create a Free Account</center></h2>
 

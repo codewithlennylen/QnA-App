@@ -2,25 +2,31 @@
 
 {% block content %}
 
-<h1>QnA App | My Questions</h1>
-
-
 <div class="container">
     {% for q in question %} 
     {% if q.answers_to_question %}
-  
-    <div class="question-answered">
-      <a href="{{url_for('view',question_id = q.id)}}">
-        <h3>{{ q.question_text }}</h3>
-        <p>Category: {{ q.category }}</p>
-      </a>
+    <div class="col mt-3">
+      <div class="card h-100 border-success">
+        <h5 class="card-header">Category: {{ q.category }}</h5>
+        <div class="card-body">
+          <h5 class="card-title">{{ q.question_text }}</h5>
+        </div>
+        <div class="card-footer">
+          <a href="{{url_for('view',question_id = q.id)}}" class="btn btn-success border-dark text-white">View Question</a>
+        </div>
+      </div>
     </div>
     {% else %}
-    <div class="question">
-      <a href="{{url_for('view',question_id = q.id)}}">
-        <h3>{{ q.question_text }}</h3>
-        <p>Category: {{ q.category }}</p>
-      </a>
+    <div class="col mt-3">
+      <div class="card h-100 border-danger">
+        <h5 class="card-header">Category: {{ q.category }}</h5>
+        <div class="card-body">
+          <h5 class="card-title">{{ q.question_text }}</h5>
+        </div>
+        <div class="card-footer">
+          <a href="{{url_for('view',question_id = q.id)}}" class="btn btn-danger border-dark text-white">View Question</a>
+        </div>
+      </div>
     </div>
     {% endif %} {% endfor %}
   </div>

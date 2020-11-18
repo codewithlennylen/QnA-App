@@ -1,58 +1,38 @@
 {% extends "base.html" %} {% block content %}
 
-<h1>QnA App | Register</h1>
-
-
 <div class="container">
 
-  <div class="card border-dark">
+  <div class="card my-3 border-dark">
     <div class="card-header text-warning">
-      <h4><b>QnA App | Login Page</b></h4>
+      <h4><b>Create a Free Account</b></h4>
     </div>
     <div class="card-body">
       <!-- <h5 class="card-title">Special title treatment</h5>
       <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
       <a href="#" class="btn btn-primary">Go somewhere</a> -->
-      <form action="{{ url_for('login') }}" method="post">
+      <form action="{{ url_for('register') }}" method="post">
         <small id="errorMessage"><label>{{ error_msg }}</label></small> <br />
         <div class="form-group">
           <label for="username">Username: </label>
-          <input type="text" class="form-control" aria-describedby="emailHelp">
+          <input type="text" name="username" class="form-control" aria-describedby="emailHelp">
         </div>
         <div class="form-group">
           <label for="password">Password: </label>
-          <input type="password" class="form-control">
+          <input type="password" name="password" class="form-control">
         </div>
-        <button type="submit" class="btn btn-primary">Login</button>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password: </label>
+          <input type="password" name="confirmPassword" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
         <br>
       </form>
     </div>
     <div class="card-footer text-muted">
-      Don't Have an Account ? <a href="{{ url_for('register') }}" class="text-warning"><b>Register Now</b></a>
+      Already Have an Account ? <a href="{{ url_for('login') }}" class="text-warning"><b>Log In Here</b></a>
     </div>
   </div>
   
   </div>
-    
-
-<div class="form-page">
-  <h2><center>Create a Free Account</center></h2>
-
-  <form action="{{ url_for('register') }}" method="POST">
-    <small id="errorMessage"><label>{{ error_msg }}</label></small> <br />
-    <label for="username">Username: </label><br />
-    <input type="text" name="username" /><br />
-    <label for="password">Password:</label><br />
-    <input type="password" name="password" /><br />
-    <label for="confirmPassword">Confirm Password:</label><br />
-    <input type="password" name="confirmPassword" /><br />
-
-    <button type="submit">Sign Up</button>
-  </form>
-
-  <p>Already Have an Account ? <a href="/login">Log In Here</a></p>
-
-  <section id="members-answers"></section>
-</div>
 
 {% endblock %}

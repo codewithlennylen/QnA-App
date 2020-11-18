@@ -1,25 +1,32 @@
 {% extends "base.html" %} {% block content %}
 
-<h1>QnA App | Ask Questions</h1>
+<div class="container">
 
-<div class="container-question">
-  <h1><center>What is your Question?</center></h1>
-  <!-- <p>Category: <small>Networking</small></p> -->
+<div class="card my-3 border-dark">
+  <div class="card-header text-warning">
+    <h4><b><center>What is your Question?</center></b></h4>
+  </div>
+  <div class="card-body">
+    <form action="{{ url_for('ask') }}" method="post">
+      <div class="form-group">
+        <label for="exampleFormControlSelect1">Select Category</label>
+        <select name="category" class="form-control" >
+          <option value="networking">Networking</option>
+          <option value="troubleshooting">Troubleshooting</option>
+          <option value="lifestyle">Lifestyle</option>
+        </select>
+      </div>
 
-  <form action="{{ url_for('ask') }}" method="post">
-    <label for="Question">Question: </label><br />
-    <input type="text" name="question" /><br />
-    <label for="category">Choose a Category:</label><br />
-    <select name="category">
-      <option value="networking">Networking</option>
-      <option value="troubleshooting">Troubleshooting</option>
-      <option value="lifestyle">Lifestyle</option>
-    </select>
+      <div class="form-group">
+        <label>Type Your Question:</label>
+        <textarea name="question" class="form-control" rows="3"></textarea>
+      </div>
+      <br />
+      <button type="submit" class="btn btn-primary text-warning"><b>Ask Question</b></button>
+    </form>
+  </div>
+</div>
 
-    <br /><button type="submit">Ask Question</button>
-  </form>
-
-  <section id="members-answers"></section>
 </div>
 
 {% endblock %}

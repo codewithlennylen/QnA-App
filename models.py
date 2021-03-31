@@ -11,7 +11,7 @@ class User(db.Model, UserMixin):
 
     # define relationships 
     questions_asked = db.relationship(
-        'Question',
+        'Question', # Class name
         foreign_keys='Question.asked_by_id',
         backref='asker',
         lazy=True
